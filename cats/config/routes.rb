@@ -4,5 +4,10 @@ Rails.application.routes.draw do
     resources :cat_rental_requests, only: [:update]
   end 
 
-  resources :cat_rental_requests
+  resources :cat_rental_requests do
+    member do 
+      patch 'approve'
+      patch 'deny'
+    end 
+  end 
 end
