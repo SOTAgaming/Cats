@@ -10,13 +10,40 @@
     <th scope="col">Description</th>
   </tr>
     <th scope="row"><%=@cat.name %> </th>
-    <td> <%= @cat.color%></td>
-    <td> <%= @cat.age%></td>
-    <td> <%= @cat.sex%></td>
-    <td> <%= @cat.description%></td>
+    <td> <%= @cat.color %></td>
+    <td> <%= @cat.age %></td>
+    <td> <%= @cat.sex %></td>
+    <td> <%= @cat.description %></td>
   <tr>
     <% %>
   </tr>
+</table>
+<br>
+<br>
+<br>
+
+
+<table>
+  <caption>Rental Requests</caption>
+
+  <tr>
+    <th scope="col">Start Date</th>
+    <th scope="col">End Date</th>
+    <th scope="col">Status</th>
+  </tr>
+<% requests = CatRentalRequest.where("cat_rental_requests.cat_id = #{@cat.id}").order(:start_date) %>
+<% requests.each do |request| %>
+   <tr>
+    <td> <%= request.start_date %></td>
+    <td> <%= request.end_date %></td>
+    <td> <%= request.status %></td>
+    <% if request.status == "PENDING"%>
+    <td> <a href="<%= request.approve! %>">Approve Request</a> </td>
+
+    <td><a href="<%= request.deny! %>">Deny Request</a> </td>
+    <% end %>
+  </tr>
+  <% end %>
 </table>
 
 <a href="<%= edit_cat_url(@cat) %>">Edit Cat</a>

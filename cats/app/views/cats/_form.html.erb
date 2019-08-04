@@ -10,7 +10,6 @@
 <form action="<%= action_url %>" method="post">
  <input type="hidden" name="authenticity_token"
     value="<%= form_authenticity_token %>">
-
     <% if type == :edit %>
       <input type="hidden" name="_method" value="patch">
     <% end %>
@@ -19,13 +18,13 @@
     value="<%= cat.name %>">
 </label>
 <br>
-<label for ="color">Color:
-  <select>
-    <option disabled value selected> -- select a color -- </option>
-    <% $COLORS.each do |color|  %>
-    <option <%= cat.color == color ? "selected" : "" %> value="<% cat.color %>">
-      <%= color %> </option>
-    <% end %>
+<label for="color">Color:
+  <select name="cat[color]">
+
+     <% $COLORS.each do |color|  %>
+     <option value="<%= color %>" ><%= color %> </option>
+     <% end %>
+
   </select>
 </label>
 <br>

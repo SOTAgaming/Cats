@@ -13,7 +13,7 @@ class Cat < ApplicationRecord
   end
 
   def color_validation
-    if !COLORS.include?(self.color)
+    if !$COLORS.include?(self.color)
       errors[:color] << "Invalid Color"
     end
   end
@@ -39,3 +39,28 @@ end
 
 #cat1 = Cat.create!(name: "Henry", color: "yellow", 
   #birth_date: Date.new(2001,2,3), sex: "M", description: "very cute" )
+
+
+# <% $COLORS.each do |color|  %>
+#     <option value="<% cat.color %>"><%= color %> </option>
+#     <% end %>
+
+
+# <label for ="color">Color: 
+#   <select id="color" name="cat[color]" value="<%= cat.color %>%" >
+#     <option disabled value selected> -- select a color -- </option>
+#     <% $COLORS.each do |color|  %>
+#     <option value="<% cat.color %>"><%= color %> </option>
+#     <% end %>
+#   </select>
+# </label>
+
+
+
+#     <% $COLORS.each do |color|  %>
+#     <option value="<%= color %>" ><% color %> </option>
+#     <% end %>
+
+
+
+    # <option value="grey">grey</option>

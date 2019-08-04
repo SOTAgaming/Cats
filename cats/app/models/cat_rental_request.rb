@@ -20,7 +20,7 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def date_validation
-    if !overlapping_approved_terequests.empty?
+    if !overlapping_approved_requests.empty?
       errors[:start_date] << "Invalid Date"
     end
   end
@@ -28,6 +28,23 @@ class CatRentalRequest < ApplicationRecord
   def overlapping_approved_requests
     overlapping_requests.select { |request| request.status == 'APPROVED' }
   end
+
+  def overlapping_pending_requests
+    overlapping_requests.select { |request| request.status == 'PENDING' }
+  end
+
+  def approve!
+
+    self.overlapping_pending_requests.each do |request|
+      request.deny!
+    end 
+    
+    self.update(status: "APPROVED")
+  end 
+
+  def deny!
+    self.update(status: "DENIED")
+  end 
 
 
 end
